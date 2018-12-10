@@ -1,0 +1,19 @@
+<li [ngClass]="{'list-group-item': true,
+  'list-group-item-success': loveIts >= 0,
+  'list-group-item-danger': loveIts < 0}"
+>
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{ title }} 
+      <span [ngClass]="{'badge': true,
+      'badge-success': loveIts >= 0,
+      'badge-danger': loveIts < 0}"> {{ loveIts }}</span>
+    </h5>
+    <small><i>{{ created_at | date : 'dd/MM/yyyy hh:mm a'}}</i></small>
+  </div>
+  <p class="d-flex mb-1">{{ content }}</p>
+  <div class="d-flex">
+    <button type="button" class="btn btn-success" (click)="like()">Like</button>
+    <button type="button" class="btn btn-danger" (click)="unlike()">Unlike</button>        
+  </div>
+  
+</li>
