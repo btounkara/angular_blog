@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PostlistComponent } from './postlist/postlist.component';
 import { PostComponent } from './post/post.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostlistComponent,
-    PostComponent
+    PostComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

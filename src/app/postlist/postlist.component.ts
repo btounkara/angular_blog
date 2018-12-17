@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../model/post.model';
+import { PostsService } from '../services/posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-postlist',
@@ -7,32 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostlistComponent implements OnInit {
   // List of all posts
-  posts = [
-    {
-      title: 'My first post',
-      content: 'This is my first post',
-      loveIts: 0,
-    }, 
-    {
-      title: 'My second post',
-      content: 'This is my second post',
-      loveIts: -5,
-    },
-    {
-      title: 'My third post',
-      content: 'This is my third post',
-      loveIts: 10,
-    },
-    {
-      title: 'My fourth post',
-      content: 'This is my fourth post',
-      loveIts: 23
-    }
-  ];
+  posts: Post[];
+  // Subscription
+  subscribePosts: Subscription;
 
-  constructor() { }
+  constructor(public postsService: PostsService) { }
 
   ngOnInit() {
+    this.subscribePosts = this.postsService.postSubject.subscribe(
+      // Retrieval of the posts
+      (postsData: Post[]) => this.posts = postsData
+    );
+    // Emit the posts
+    this.postsService.emitPosts();
   }
 
 }
