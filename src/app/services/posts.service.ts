@@ -1,39 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Post } from '../model/post.model';
 import { Subject } from 'rxjs';
+import * as firebase from 'firebase';
+import { DataSnapshot } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
 
-  posts: Post[] = [new Post('My first post', 'This is my first post', new Date(), 0)];
-    // {
-    //   title: 'My first post',
-    //   content: 'This is my first post',
-    //   loveIts: 0,
-    // }, 
-    // {
-    //   title: 'My second post',
-    //   content: 'This is my second post',
-    //   loveIts: -5,
-    // },
-    // {
-    //   title: 'My third post',
-    //   content: 'This is my third post',
-    //   loveIts: 10,
-    // },
-    // {
-    //   title: 'My fourth post',
-    //   content: 'This is my fourth post',
-    //   loveIts: 23
-    // }
+export class PostsService implements OnInit {
+
+  private postsDatabase = '/posts';
   
-
+  posts: Post[] = [];
   // Subject
   postSubject = new Subject<Post[]>();
   
-  constructor() { }
+  constructor() {  }
+
+  ngOnInit(){
+    this.getPosts();
+  }
 
   /* Emits the posts */
   emitPosts(){
@@ -50,7 +37,42 @@ export class PostsService {
     post.loveIts--;
   }
 
+  /* Retrieve the posts */
   getPosts(){
-    return this.posts;
+    firebase.database().ref(this.postsDatabase)
+      .on('value', (data: DataSnapshot) => {
+          // Retrieve the posts from firebase
+          this.posts = data.val() ? data.val() : [];
+          // Emit the posts
+          this.emitPosts();
+        }
+      );
+  }
+
+  /* Save the posts in firebase's database */
+  savePosts(){
+    firebase.database().ref('/posts').set(this.posts);
+  }
+
+  /* Add a new post to the list */
+  addPost(post: Post){
+    // Add the post in the list
+    this.posts.push(post);
+
+    // Updating the database
+    this.savePosts();
+
+    // Updating
+    this.emitPosts();
+  }
+
+  /* Remove a post */
+  remove(post: Post){
+    // Return the list without the post to remove
+    this.posts = this.posts.filter(p => p !== post);
+    // Updating the database
+    this.savePosts();
+    // Updating
+    this.emitPosts();
   }
 }

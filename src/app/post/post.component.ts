@@ -26,4 +26,10 @@ export class PostComponent implements OnInit {
   onUnlike(){
     this.postsService.unlike(this.post);
   }
+
+  onDelete(post: Post){
+    if(confirm('This post will be removed. Do you want to continue ?')){
+      this.postsService.remove(post);
+    }
+  }
 }
