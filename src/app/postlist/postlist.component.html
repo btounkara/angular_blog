@@ -1,4 +1,7 @@
 <ul class="list-group">
+  <div class="alert alert-dark" ngClass="'hidden' = !loadingFinished" role="alert" *ngIf="posts.length === 0">
+    The list is empty !
+  </div>
   <app-post *ngFor="let post of posts"
     [post]="post"
   ></app-post>

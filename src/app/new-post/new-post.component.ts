@@ -37,7 +37,6 @@ export class NewPostComponent implements OnInit {
     const formValue = this.postForm.value;
     // Creates a new post with the data of the form
     const newPost = new Post(formValue['title'], formValue['content'], new Date(), formValue['loveIts']);
-    console.log(newPost);
     // Add the new post to the list
     this.postService.addPost(newPost);
     // Redirect to the posts
