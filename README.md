@@ -1,7 +1,7 @@
 # Blog angular 
 
 ## Description
-This is a a little blog I developed while I was learning about angular.
+This is a a little blog I developed while I was learning to use angular.
 
 ## How to install
 
