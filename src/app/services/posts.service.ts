@@ -12,15 +12,11 @@ export class PostsService {
 
   private postsDatabase = '/posts';
 
-  // To not display the empty message before the loading is done
-  loadingFinished: boolean;
-  
   posts: Post[] = [];
   // Subject
   postSubject = new Subject<Post[]>();
   
   constructor() {
-    this.loadingFinished = false;
     this.getPosts();
   }
 
@@ -45,8 +41,6 @@ export class PostsService {
       .on('value', (data: DataSnapshot) => {
           // Retrieve the posts from firebase
           this.posts = data.val() ? data.val() : [];
-          // Indicate that the loading is finished
-          this.loadingFinished = true;
           // Emit the posts
           this.emitPosts();
         }
