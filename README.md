@@ -28,3 +28,18 @@ npm start
 3. Create your own project
 4. Create your own database
 5. Modify the app.component.ts by copying/pasting on the constructor the code Firebase provided
+  ```html
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB....WC8yHem3Ezo",
+    authDomain: "ocr-blog-angular.firebaseapp.com",
+    databaseURL: "https://ocr-blog-angular.firebaseio.com",
+    projectId: "ocr-blog-angular",
+    storageBucket: "ocr-blog-angular.appspot.com",
+    messagingSenderId: "......."
+  };
+  firebase.initializeApp(config);
+</script>
+  ```
