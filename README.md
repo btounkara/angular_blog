@@ -1,7 +1,7 @@
 # Blog angular 
 
 ## Description
-This is a a little blog I had to do while I was doing the openclassroom course about angular.
+This is a a little blog I developed while I was learning about angular.
 
 ## How to install
 
